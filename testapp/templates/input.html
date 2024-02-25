@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input</title>
+</head>
+<body bgcolor="#20B2AA">
+    <form action="{% url 'save_user' %}" method="POST">
+        {% csrf_token %} <!--//csrf token inseted in form-->
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone"><br>
+        <label for="gamesense">GameSense:</label><br>
+        <input type="number" id="gamesense" name="gamesense"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
