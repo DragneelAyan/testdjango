@@ -2,4 +2,4 @@ Now a very basic user list is ready.
 Here we can view data, add data from URL.
 Next we will try to-
     1. Delete data by any id number or filter.
-    2. Try different queryset things with this.
+    2. Again start from Limiting Results.
