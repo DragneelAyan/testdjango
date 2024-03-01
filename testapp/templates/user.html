@@ -14,7 +14,7 @@
         }
     </style>
 </head>
-<body bgcolor="#20B2AA" align="center">
+<body bgcolor="#20B2AA">
     <h1>User List</h1>
     <table align="center" style="width:100%">
         <thead>
@@ -25,22 +25,31 @@
                 <th>Phone</th>
                 <th>GameSense</th>
                 <th>StoryGames</th>
+                <th>Delete User</th>
             </tr>
         </thead>
         <tbody>
             {% for user in users %}
-            <tr>
+            <tr align="center">
                 <td>{{ user.id }}
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phone }}</td>
                 <td>{{ user.gamesense}}</td>
-                <td>{{ user.storygames }}
+                <td>{{ user.storygames }}</td>
+                <td>
+                    <form action="{% url 'delete_user' user.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <br><br>
-    <button type="button" onclick="window.location.href = '/testapp/input/';">Add User</button>
+    <button type="button" onclick="window.location.href = '/testapp/input/';">
+        Add User
+    </button>
 </body>
 </html>

@@ -8,3 +8,9 @@ class User(models.Model):
     gamesense = models.IntegerField(default=0)
     storygames = models.IntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self) -> str:
+        return self.name
+    
+    # class Meta:
+        # ordering = ['id']

@@ -3,13 +3,15 @@ from django.http import HttpResponse
 from .models import User
 from django.db import connection
 from django.db.models import Q, F
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 # Create your views here.
 def UserView(request):
     # return HttpResponse("Hey, I'm Batman!")
     # name = 'Ayan'
-    # users = User.objects.all()
-    # return render(request, 'user.html', {'users': users})
+    users = User.objects.all()
+    return render(request, 'user.html', {'users': users})
     # query_set = User.objects.all()
 #Using filter with gt
     # filtered_query_set = User.objects.filter(gamesense__gt=5)
@@ -32,8 +34,12 @@ def UserView(request):
 #Sorting queryset. We use - for reverse sorting.
     # sort_query_set = User.objects.order_by('-gamesense', '-storygames')
 #Return a queryset which returns three most recent updated queryset 
-    threemostrecent_query_set = User.objects.order_by('-updated_at')[0:3]
-    return render(request, 'user.html', {'users': threemostrecent_query_set})
+    # threemostrecent_query_set = User.objects.order_by('-updated_at')[0:3]
+#Limiting result
+    # limit_query_set = User.objects.all()[5:10]
+#Annotating objects
+    # annotate_query_set = User.objects.annotate(valorant=F('gamesense'))
+    # return render(request, 'user.html', {'users': annotate_query_set})
 
 
 def input(request):
@@ -49,3 +55,13 @@ def save_user(request):
         storygames = request.POST['storygames']
         User.objects.create(name=name, email=email, phone=phone, gamesense=gamesense, storygames=storygames)
         return redirect('users_list')
+    
+    
+def delete_user(request, id):
+    User.objects.filter(id=id).delete()
+    return redirect('users_list')
+
+
+@api_view()
+def userlist(request, id):
+    return Response(id)
